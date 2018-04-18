@@ -42,13 +42,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public Boolean insertUser(User user) {
-		// TODO Auto-generated method stub
-		return true;
+		UserDao userDao =new UserDaoImpl();
+		return userDao.insertUser(user);
 	}
 
 	public Boolean login(String id, String password) {
-		// TODO Auto-generated method stub
-		return true;
+		UserDao userDao =new UserDaoImpl();
+		return userDao.login( id, password);
 	}
 
 }
