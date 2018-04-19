@@ -19,6 +19,7 @@ public class ChatRecordDaoImpl implements ChatRecordDao{
 			pst.setString(2, chatRecord.getReceiverId());
 			pst.setString(3, chatRecord.getContent()); 
 			pst.executeUpdate();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

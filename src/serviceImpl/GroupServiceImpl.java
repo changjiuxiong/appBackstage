@@ -17,5 +17,13 @@ public class GroupServiceImpl implements GroupService{
 		groups.add(new Group("同学群117822","同学群5","同学3号","img/head/005.png"));
 		return groups;
 	}
+
+	public List<Group> selectGroupChatListById(String id) {
+		List<Group> groups=new ArrayList<Group>();
+		groups.add(new Group("同学群112782","同学群1","同学3号","img/head/001.png"));
+		groups.add(new Group("同学群1127822","同学群2","同学3号","img/head/002.png"));
+		groups.add(new Group("同学群1137822","同学群3","同学3号","img/head/003.png"));
+		return groups;
+	}
 	
 }
