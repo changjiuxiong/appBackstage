@@ -38,8 +38,7 @@ public class SelectChatListById extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		
 		Gson gson =new Gson();
-	    String str=gson.toJson(users);
-	    
+	    String str=gson.toJson(users);    
 		out.print(str);
 	}
 
