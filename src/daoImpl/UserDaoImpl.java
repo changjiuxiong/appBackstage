@@ -69,4 +69,43 @@ public class UserDaoImpl implements UserDao{
 		return false;
 	}
 
+	public List<User> selectFriendsById(String id) {
+		List<User> users=new ArrayList<User>();
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("select * from user where id in (select friendId from friend where id = ?)");
+			pst.setString(1, id);
+			ResultSet rs=pst.executeQuery();
+			
+			while(rs.next()){
+				users.add(new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+			}
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+
+	public List<User> selectChatListById(String id) {
+		List<User> users=new ArrayList<User>();
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("select * from user where id in (select DISTINCT * from (select receiverId from chatrecord where senderId = ? union all select senderId from chatrecord where receiverId = ?)t1)");
+			pst.setString(1, id);
+			pst.setString(2, id);
+			ResultSet rs=pst.executeQuery();
+			
+			while(rs.next()){
+				users.add(new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+			}
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+
 }
