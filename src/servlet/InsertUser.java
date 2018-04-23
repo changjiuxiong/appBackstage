@@ -35,7 +35,7 @@ public class InsertUser extends HttpServlet {
 		int age = Integer.parseInt(request.getParameter("age"));
 		/*String headImgUrl = request.getParameter("headImgUrl");
 		String isShareLocation = request.getParameter("isShareLocation");*/
-		String headImgUrl = "temp";
+		String headImgUrl = "img/defaultHead.jpg";
 		String isShareLocation = "开启";
 		
 		String password = request.getParameter("password");
