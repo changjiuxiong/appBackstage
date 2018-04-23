@@ -17,4 +17,6 @@ public interface UserService {
 	public Boolean insertUser(User user);
 
 	public Boolean login(String id, String password);
+
+	public List<User> selectUsersByIdOrName(String idOrName);
 }

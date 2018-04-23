@@ -14,13 +14,13 @@ import service.FriendApplyService;
 import serviceImpl.FriendApplyServiceImpl;
 
 /**
- * Servlet implementation class AddFriendApply
+ * Servlet implementation class UpdateFriendApply
  */
-@WebServlet("/AddFriendApply")
-public class AddFriendApply extends HttpServlet {
+@WebServlet("/UpdateFriendApply")
+public class UpdateFriendApply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -29,13 +29,14 @@ public class AddFriendApply extends HttpServlet {
 		/*星号表示所有的异域请求都可以接受，*/  
 		response.setHeader("Access-Control-Allow-Methods","GET,POST");  
 		
-		String senderId = request.getParameter("senderId");
-		String receiverId = request.getParameter("receiverId");
-		String statue = "待审核";
+		String senderId = request.getParameter("applyerId");
+		String receiverId = request.getParameter("userId");
+		String statue = request.getParameter("statue");
 		
+		System.out.println(statue);
 		FriendApplyService friendApplyService=new FriendApplyServiceImpl();
 		FriendApply friendApply = new FriendApply(senderId, receiverId, statue);
-		Boolean isOk = friendApplyService.addFriendApply(friendApply);
+		Boolean isOk = friendApplyService.updateFriendApply(friendApply);
 		
 		PrintWriter out=response.getWriter();	    
 		out.print(isOk);

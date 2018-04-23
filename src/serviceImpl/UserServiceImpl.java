@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.login( id, password);
 	}
 
+	public List<User> selectUsersByIdOrName(String idOrName) {
+		UserDao userDao =new UserDaoImpl();
+		return userDao.selectUsersByIdOrName(idOrName);
+	}
+
 }

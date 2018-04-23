@@ -11,5 +11,6 @@ public interface UserDao {
 	public Boolean login(String id, String password);
 	public List<User> selectFriendsById(String id);
 	public List<User> selectChatListById(String id);
+	public List<User> selectUsersByIdOrName(String idOrName);
 }
 

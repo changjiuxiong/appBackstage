@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.FriendApply;
+import model.User;
 import service.FriendApplyService;
 import serviceImpl.FriendApplyServiceImpl;
 
 /**
- * Servlet implementation class AddFriendApply
+ * Servlet implementation class GetFriendApplyById
  */
-@WebServlet("/AddFriendApply")
-public class AddFriendApply extends HttpServlet {
+@WebServlet("/GetFriendApplyById")
+public class GetFriendApplyById extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -29,16 +33,16 @@ public class AddFriendApply extends HttpServlet {
 		/*星号表示所有的异域请求都可以接受，*/  
 		response.setHeader("Access-Control-Allow-Methods","GET,POST");  
 		
-		String senderId = request.getParameter("senderId");
-		String receiverId = request.getParameter("receiverId");
-		String statue = "待审核";
+		String id = request.getParameter("id");
 		
 		FriendApplyService friendApplyService=new FriendApplyServiceImpl();
-		FriendApply friendApply = new FriendApply(senderId, receiverId, statue);
-		Boolean isOk = friendApplyService.addFriendApply(friendApply);
+		
+		List<User> users = friendApplyService.getFriendApplyById(id);
 		
 		PrintWriter out=response.getWriter();	    
-		out.print(isOk);
+		Gson gson =new Gson();
+	    String str=gson.toJson(users);    
+		out.print(str);
 	}
 
 	/**

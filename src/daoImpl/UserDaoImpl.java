@@ -108,4 +108,24 @@ public class UserDaoImpl implements UserDao{
 		return users;
 	}
 
+	public List<User> selectUsersByIdOrName(String idOrName) {
+		List<User> users=new ArrayList<User>();
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("select * from user where id like ? or name like ?");
+			pst.setString(1, "%" + idOrName + "%");
+			pst.setString(2, "%" + idOrName + "%");
+			ResultSet rs=pst.executeQuery();
+			
+			while(rs.next()){
+				users.add(new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+			}
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+
 }
