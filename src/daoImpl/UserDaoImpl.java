@@ -73,8 +73,9 @@ public class UserDaoImpl implements UserDao{
 		List<User> users=new ArrayList<User>();
 		try {
 			Connection conn=JdbcUtil.getConnection();
-			PreparedStatement pst=conn.prepareStatement("select * from user where id in (select friendId from friend where id = ?)");
+			PreparedStatement pst=conn.prepareStatement("select * from user where id in (select friendId from friend where id = ?) or id in (select id from friend where friendId = ?)");
 			pst.setString(1, id);
+			pst.setString(2, id);
 			ResultSet rs=pst.executeQuery();
 			
 			while(rs.next()){
@@ -115,6 +116,42 @@ public class UserDaoImpl implements UserDao{
 			PreparedStatement pst=conn.prepareStatement("select * from user where id like ? or name like ?");
 			pst.setString(1, "%" + idOrName + "%");
 			pst.setString(2, "%" + idOrName + "%");
+			ResultSet rs=pst.executeQuery();
+			
+			while(rs.next()){
+				users.add(new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+			}
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return users;
+	}
+
+	public Boolean updateUser(User user) {
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("update user set name = ?, sex = ?, age = ? where id = ?");
+			pst.setString(1, user.getName());
+			pst.setString(2, user.getSex()); 
+			pst.setInt(3, user.getAge());
+			pst.setString(4, user.getId());
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public List<User> selectUsersByGroupId(String groupId) {
+		List<User> users=new ArrayList<User>();
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("select * from user where id in (select userId from groupMember where id = ?)");
+			pst.setString(1, groupId);
 			ResultSet rs=pst.executeQuery();
 			
 			while(rs.next()){

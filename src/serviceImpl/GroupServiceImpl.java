@@ -20,5 +20,10 @@ public class GroupServiceImpl implements GroupService{
 		GroupDao groupDao = new GroupDaoImpl();
 		return groupDao.SelectGroupChatListById(id);
 	}
+
+	public boolean addGroup(Group group) {
+		GroupDao groupDao = new GroupDaoImpl();
+		return groupDao.addGroup(group);
+	}
 	
 }

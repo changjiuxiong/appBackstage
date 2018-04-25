@@ -19,6 +19,13 @@ public class Friend {
 		this.id = id;
 		this.friendId = friendId;
 	}
+	public Friend() {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Friend [id=" + id + ", friendId=" + friendId + "]";
+	}
 	
 	
 }

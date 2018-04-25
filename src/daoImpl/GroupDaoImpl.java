@@ -52,4 +52,21 @@ public class GroupDaoImpl implements GroupDao{
 		return groups;
 	}
 
+	public boolean addGroup(Group group) {
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("insert into chatGroup values(?,?,?,?)");
+			pst.setString(1, group.getId()); 
+			pst.setString(2, group.getName()); 
+			pst.setString(3, group.getMasterId()); 
+			pst.setString(4, group.getHeadImgUrl()); 
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }

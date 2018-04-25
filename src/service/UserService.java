@@ -19,4 +19,8 @@ public interface UserService {
 	public Boolean login(String id, String password);
 
 	public List<User> selectUsersByIdOrName(String idOrName);
+
+	public Boolean updateUser(User user);
+
+	public List<User> selectUsersByGroupId(String groupId);
 }
