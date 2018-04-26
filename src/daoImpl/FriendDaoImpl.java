@@ -28,7 +28,7 @@ public class FriendDaoImpl implements FriendDao{
 		return true;
 	}
 
-	public Boolean deleteFriend(Friend friend) {
+	public boolean deleteFriend(Friend friend) {
 		try {
 			Connection conn=JdbcUtil.getConnection();
 			PreparedStatement pst=conn.prepareStatement("delete from friend where (id = ? and friendId = ?) or (friendId = ? and id = ?)");

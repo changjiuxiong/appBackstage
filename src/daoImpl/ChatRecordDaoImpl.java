@@ -44,12 +44,13 @@ public class ChatRecordDaoImpl implements ChatRecordDao{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return 0;
 		}
 		return messageNum;
 	}
 
 	public List<ChatRecord> getNewMsg(String senderId, String receiverId,int curMessageNum) {
-		List<ChatRecord> ChatRecords = new ArrayList<ChatRecord>();
+		List<ChatRecord> chatRecords = new ArrayList<ChatRecord>();
 		try {
 			Connection conn=JdbcUtil.getConnection();
 			PreparedStatement pst=conn.prepareStatement("select * from chatRecord where senderId = ? and receiverId = ? LIMIT ?,99999");
@@ -58,14 +59,14 @@ public class ChatRecordDaoImpl implements ChatRecordDao{
 			pst.setInt(3, curMessageNum);
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()){
-				ChatRecords.add(new ChatRecord(rs.getString(1), rs.getString(1), rs.getString(3), rs.getString(4)));
+				chatRecords.add(new ChatRecord(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return ChatRecords;
+		return chatRecords;
 	}
 
 	public ChatRecord getLastMsgByTwoId(String id1, String id2) {

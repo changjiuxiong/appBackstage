@@ -40,10 +40,15 @@ public class AddGroup extends HttpServlet {
 				
 		GroupService groupService = new GroupServiceImpl();
 		Group group = new Group(id, name, masterId,"img/defaultHead.jpg");
-		Boolean isOk = groupService.addGroup(group);
+		boolean isOk = groupService.addGroup(group);
 		
-		PrintWriter out=response.getWriter();	    
-		out.print(isOk);
+		PrintWriter out=response.getWriter();	
+		if(isOk){
+			out.print(id);
+		}else{
+			out.print("建群失败");
+		}   
+		
 		
 	}
 

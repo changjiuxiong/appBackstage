@@ -2,8 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import model.ChatRecord;
-
-import service.ChatRecordService;
-import serviceImpl.ChatRecordServiceImpl;
+import model.Friend;
+import model.FriendApply;
+import service.FriendApplyService;
+import service.FriendService;
+import serviceImpl.FriendApplyServiceImpl;
+import serviceImpl.FriendServiceImpl;
 
 /**
- * Servlet implementation class GetNewMsg
+ * Servlet implementation class DeleteFriend
  */
-@WebServlet("/GetNewMsg")
-public class GetNewMsg extends HttpServlet {
-	
+@WebServlet("/DeleteFriend")
+public class DeleteFriend extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -34,15 +33,13 @@ public class GetNewMsg extends HttpServlet {
 		
 		String senderId = request.getParameter("senderId");
 		String receiverId = request.getParameter("receiverId");
-		int CurMessageNum = Integer.parseInt(request.getParameter("CurMessageNum"));
 		
-		ChatRecordService chatRecordService=new ChatRecordServiceImpl();
-		List<ChatRecord> chatRecords = chatRecordService.getNewMsg(senderId,receiverId,CurMessageNum);
+		FriendService friendService = new FriendServiceImpl();
+		Friend friend = new Friend(senderId, receiverId);
+		Boolean isOk = friendService.deleteFriend(friend);
 		
-		PrintWriter out=response.getWriter();
-		Gson gson =new Gson();
-	    String str=gson.toJson(chatRecords);    
-		out.print(str);
+		PrintWriter out=response.getWriter();	    
+		out.print(isOk);
 	}
 
 	/**
