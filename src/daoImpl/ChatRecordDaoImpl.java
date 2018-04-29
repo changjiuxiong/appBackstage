@@ -69,25 +69,25 @@ public class ChatRecordDaoImpl implements ChatRecordDao{
 		return chatRecords;
 	}
 
-	public ChatRecord getLastMsgByTwoId(String id1, String id2) {
-		ChatRecord chatRecord = null;
+	public List<ChatRecord> getLastMsgByTwoId(String id1, String id2) {
+		List<ChatRecord> chatRecords = new ArrayList<ChatRecord>();
 		try {
 			Connection conn=JdbcUtil.getConnection();
-			PreparedStatement pst=conn.prepareStatement("select * from chatrecord where (senderId = ? and receiverId = ?) or (receiverId = ? and senderId = ?) ORDER BY dateTime DESC LIMIT 1");
+			PreparedStatement pst=conn.prepareStatement("select * from chatrecord where (senderId = ? and receiverId = ?) or (receiverId = ? and senderId = ?) ORDER BY dateTime DESC LIMIT 20");
 			pst.setString(1, id1); 
 			pst.setString(2, id2);
 			pst.setString(3, id1); 
 			pst.setString(4, id2);
 			ResultSet rs=pst.executeQuery();
-			if(rs.next()){
-				chatRecord = new ChatRecord(rs.getString(1), rs.getString(1), rs.getString(3), rs.getString(4));
+			while(rs.next()){
+				chatRecords.add(new ChatRecord(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return chatRecord;
+		return chatRecords;
 	}
 
 }

@@ -24,4 +24,9 @@ public class ChatRecordServiceImpl implements ChatRecordService{
 		return chatRecordDao.getNewMsg(senderId,receiverId,curMessageNum);
 	}
 
+	public List<ChatRecord> getLastMsgByTwoId(String id1, String id2) {
+		ChatRecordDao chatRecordDao = new ChatRecordDaoImpl();
+		return chatRecordDao.getLastMsgByTwoId(id1, id2);
+	}
+
 }

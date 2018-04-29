@@ -11,5 +11,5 @@ public interface ChatRecordDao {
 
 	public List<ChatRecord> getNewMsg(String senderId, String receiverId,int curMessageNum);
 	
-	public ChatRecord getLastMsgByTwoId(String Id1, String id2);
+	public List<ChatRecord> getLastMsgByTwoId(String Id1, String id2);
 }
