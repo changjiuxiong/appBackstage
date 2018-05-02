@@ -1,28 +1,35 @@
 package model;
 
 public class Point {
-	private double longitude;
-	private double latitude;
-	public double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-	public double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
+	private String id;
+	private double lng;
+	private double lat;
 	
-	public Point(double longitude, double latitude) {
-		this.longitude = longitude;
-		this.latitude = latitude;
+	
+	public String getId() {
+		return id;
 	}
-	@Override
-	public String toString() {
-		return "Point [longitude=" + longitude + ", latitude=" + latitude + "]";
+	public void setId(String id) {
+		this.id = id;
 	}
+	public double getLng() {
+		return lng;
+	}
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+	public double getLat() {
+		return lat;
+	}
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+	public Point(String id, double lng, double lat) {
+		this.id = id;
+		this.lng = lng;
+		this.lat = lat;
+	}
+
+	
 	
 }
