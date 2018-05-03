@@ -165,4 +165,24 @@ public class UserDaoImpl implements UserDao{
 		return users;
 	}
 
+	public User getUserById(String id) {
+		User user = null;
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("select * from user where id = ?");
+			pst.setString(1, id);
+			ResultSet rs=pst.executeQuery();
+			
+			if(rs.next()){
+				user = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7));
+			}
+			conn.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return user;
+	}
+
 }

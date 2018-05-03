@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectFriendsById(id);
 	}
 
-	public User getUserByIdServlet(String id) {
-		// TODO Auto-generated method stub
-		return new User("同学2号","李长久2","男",23,"img/head/002.png","开启","密码保密");
+	public User getUserById(String id) {
+		UserDao userDao = new UserDaoImpl();
+		return userDao.getUserById(id);
 	}
 
 	public List<User> selectChatListById(String id) {

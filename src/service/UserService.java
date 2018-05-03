@@ -10,7 +10,7 @@ public interface UserService {
 
 	public List<User> selectFriendsById(String id);
 
-	public User getUserByIdServlet(String id);
+	public User getUserById(String id);
 
 	public List<User> selectChatListById(String id);
 

@@ -33,7 +33,7 @@ public class GetUserByIdServlet extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		UserService userService=new UserServiceImpl();
-		User user=userService.getUserByIdServlet(id);
+		User user=userService.getUserById(id);
 		PrintWriter out=response.getWriter();
 		
 		Gson gson =new Gson();
