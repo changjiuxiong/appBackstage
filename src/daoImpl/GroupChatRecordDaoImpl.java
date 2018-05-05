@@ -21,7 +21,7 @@ public class GroupChatRecordDaoImpl implements GroupChatRecordDao{
 
 			ResultSet rs=pst.executeQuery();
 			if(rs.next()){
-				groupChatRecord = new GroupChatRecord(rs.getString(1), rs.getString(1), rs.getString(3), rs.getString(4), rs.getString(5));
+				groupChatRecord = new GroupChatRecord(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 			}
 			conn.close();
 		} catch (Exception e) {

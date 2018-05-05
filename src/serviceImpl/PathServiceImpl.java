@@ -1,5 +1,7 @@
 package serviceImpl;
 
+import java.util.List;
+
 import dao.PathDao;
 import dao.PathPointDao;
 import dao.PointDao;
@@ -34,6 +36,16 @@ public class PathServiceImpl implements PathService {
 		}else{
 			return false;
 		}
+	}
+
+	public List<Path> getPathListByUserId(String userId) {
+		PathDao pathDao = new PathDaoImpl();
+		return pathDao.getPathListByUserId(userId);
+	}
+
+	public List<Point> getStartAndEndById(String id) {
+		PathDao pathDao = new PathDaoImpl();
+		return pathDao.getStartAndEndById(id);
 	}
 
 }

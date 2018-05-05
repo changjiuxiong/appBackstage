@@ -6,4 +6,6 @@ public interface PointDao {
 
 	boolean addPoint(Point point);
 
+	Point getPointById(String id);
+
 }

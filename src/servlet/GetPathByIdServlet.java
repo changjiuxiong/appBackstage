@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.PathPointService;
+import serviceImpl.PathPointServiceImpl;
+
 import com.google.gson.Gson;
 
+import model.PathPoint;
 import model.Point;
 
 /**
@@ -28,16 +32,17 @@ public class GetPathByIdServlet extends HttpServlet {
 		/*设置响应头允许ajax跨域访问*/  
 		response.setHeader("Access-Control-Allow-Origin","*");  
 		/*星号表示所有的异域请求都可以接受，*/  
-		response.setHeader("Access-Control-Allow-Methods","GET,POST");  
-		List<Point> path = new ArrayList<Point>();
-
+		response.setHeader("Access-Control-Allow-Methods","GET,POST");
+		String pathId = request.getParameter("pathId");
 		
+		PathPointService pathPointService = new PathPointServiceImpl();
+		List<Point> points = pathPointService.getPointsByPathId(pathId);
+
 		PrintWriter out=response.getWriter();
 		
 		Gson gson =new Gson();
-	    String str=gson.toJson(path);
+	    String str=gson.toJson(points);
 	    out.print(str);
-	    System.out.println("GetPathByIdServlet");
 	}
 
 
