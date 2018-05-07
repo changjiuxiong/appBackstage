@@ -185,4 +185,19 @@ public class UserDaoImpl implements UserDao{
 		return user;
 	}
 
+	public boolean updateUserHeadImg(User user) {
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("update user set headImgUrl = ? where id = ?");
+			pst.setString(1, user.getHeadImgUrl());
+			pst.setString(2, user.getId()); 
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }

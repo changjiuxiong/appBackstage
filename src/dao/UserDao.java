@@ -15,5 +15,6 @@ public interface UserDao {
 	public Boolean updateUser(User user);
 	public List<User> selectUsersByGroupId(String groupId);
 	public User getUserById(String id);
+	public boolean updateUserHeadImg(User user);
 }
 

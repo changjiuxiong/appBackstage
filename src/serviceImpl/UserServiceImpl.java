@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectUsersByGroupId(groupId);
 	}
 
+	public boolean updateUserHeadImg(User user) {
+		UserDao userDao =new UserDaoImpl();
+		return userDao.updateUserHeadImg(user);
+	}
+
 }

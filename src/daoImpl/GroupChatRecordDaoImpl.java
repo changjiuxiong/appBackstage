@@ -12,23 +12,23 @@ import dao.GroupChatRecordDao;
 
 public class GroupChatRecordDaoImpl implements GroupChatRecordDao{
 
-	public GroupChatRecord getLastMsgById(String id) {
-		GroupChatRecord groupChatRecord = null;
+	public List<GroupChatRecord> getLastMsgById(String id) {
+		List<GroupChatRecord> groupChatRecords = new ArrayList<GroupChatRecord>();
 		try {
 			Connection conn=JdbcUtil.getConnection();
-			PreparedStatement pst=conn.prepareStatement("select * from groupchatrecord where groupId = ? ORDER BY dateTime DESC LIMIT 1");
+			PreparedStatement pst=conn.prepareStatement("select * from groupchatrecord where groupId = ? ORDER BY dateTime DESC LIMIT 20");
 			pst.setString(1, id); 
 
 			ResultSet rs=pst.executeQuery();
-			if(rs.next()){
-				groupChatRecord = new GroupChatRecord(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+			while(rs.next()){
+				groupChatRecords.add(new GroupChatRecord(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 			}
 			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return groupChatRecord;
+		return groupChatRecords;
 	}
 
 	public boolean insert(GroupChatRecord groupChatRecord) {

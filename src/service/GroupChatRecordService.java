@@ -11,5 +11,7 @@ public interface GroupChatRecordService {
 	List<GroupChatRecord> getGroupNewMsg(String groupId, int curMessageNum);
 
 	int getGroupMessageNum(String groupId);
+
+	List<GroupChatRecord> getLastGroupMsgById(String groupId);
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import model.GroupChatRecord;
 
 public interface GroupChatRecordDao {
-	public GroupChatRecord getLastMsgById(String id);
+	public List<GroupChatRecord> getLastMsgById(String id);
 
 	public boolean insert(GroupChatRecord groupChatRecord);
 

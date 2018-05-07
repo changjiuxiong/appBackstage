@@ -23,4 +23,6 @@ public interface UserService {
 	public Boolean updateUser(User user);
 
 	public List<User> selectUsersByGroupId(String groupId);
+
+	public boolean updateUserHeadImg(User user);
 }

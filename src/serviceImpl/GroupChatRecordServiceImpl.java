@@ -24,4 +24,9 @@ public class GroupChatRecordServiceImpl implements GroupChatRecordService {
 		return groupChatRecordDao.getGroupMessageNum(groupId);
 	}
 
+	public List<GroupChatRecord> getLastGroupMsgById(String groupId) {
+		GroupChatRecordDao groupChatRecordDao = new GroupChatRecordDaoImpl();
+		return groupChatRecordDao.getLastMsgById(groupId);
+	}
+
 }
