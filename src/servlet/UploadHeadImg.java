@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 /**
  * Servlet implementation class UploadHeadImg
  */
-@WebServlet("/UploadHeadImg")
+@WebServlet("/aaaaaa")
 public class UploadHeadImg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServletContext sc;
