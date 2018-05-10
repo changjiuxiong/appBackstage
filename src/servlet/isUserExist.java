@@ -9,22 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.FriendApply;
-import model.Group;
+import model.User;
+import service.UserService;
+import serviceImpl.UserServiceImpl;
 
-import service.FriendApplyService;
-import service.GroupService;
-import serviceImpl.FriendApplyServiceImpl;
-import serviceImpl.GroupServiceImpl;
-import util.IdUtil;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class AddGroup
+ * Servlet implementation class isUserExist
  */
-@WebServlet("/AddGroup")
-public class AddGroup extends HttpServlet {
+@WebServlet("/isUserExist")
+public class isUserExist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -34,22 +31,14 @@ public class AddGroup extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Methods","GET,POST");  
 		
 		String id = request.getParameter("id");
-		id = IdUtil.getId();
-		String name = request.getParameter("name");
-		String masterId = request.getParameter("masterId");
-				
-		GroupService groupService = new GroupServiceImpl();
-		Group group = new Group(id, name, masterId,"/img/defaultHead.jpg");
-		boolean isOk = groupService.addGroup(group);
+		UserService userService=new UserServiceImpl();
+		User user=userService.getUserById(id);
+		PrintWriter out=response.getWriter();
 		
-		PrintWriter out=response.getWriter();	
-		if(isOk){
-			out.print(id);
-		}else{
-			out.print("建群失败");
-		}   
-		
-		
+		Gson gson =new Gson();
+	    String str=gson.toJson(user);
+	    
+		out.print(str);
 	}
 
 	/**

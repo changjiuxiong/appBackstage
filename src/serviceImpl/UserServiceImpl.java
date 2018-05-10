@@ -6,7 +6,9 @@ import java.util.List;
 import service.UserService;
 
 import dao.UserDao;
+import dao.UserPointDao;
 import daoImpl.UserDaoImpl;
+import daoImpl.UserPointDaoImpl;
 
 import model.User;
 
@@ -33,6 +35,8 @@ public class UserServiceImpl implements UserService{
 
 	public Boolean insertUser(User user) {
 		UserDao userDao =new UserDaoImpl();
+		UserPointDao userPointDao = new UserPointDaoImpl();
+		boolean isOk = userPointDao.addUserPoint(user.getId());
 		return userDao.insertUser(user);
 	}
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.GroupChatRecord;
+import model.MyGroupChatRecord;
 import service.GroupChatRecordService;
 import serviceImpl.GroupChatRecordServiceImpl;
 
@@ -35,11 +36,11 @@ public class GetLastGroupMsgById extends HttpServlet {
 		String groupId = request.getParameter("groupId");
 		
 		GroupChatRecordService groupchatRecordService = new GroupChatRecordServiceImpl();
-		List<GroupChatRecord> groupchatRecords = groupchatRecordService.getLastGroupMsgById(groupId);
+		List<MyGroupChatRecord> myGroupChatRecords = groupchatRecordService.getLastMyGroupMsgById(groupId);
 		
 		PrintWriter out=response.getWriter();
 		Gson gson =new Gson();
-	    String str=gson.toJson(groupchatRecords);    
+	    String str=gson.toJson(myGroupChatRecords);   
 		out.print(str);
 	}
 

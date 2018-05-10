@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ChatRecord;
 import model.GroupChatRecord;
+import model.MyGroupChatRecord;
 import service.ChatRecordService;
 import service.GroupChatRecordService;
 import serviceImpl.ChatRecordServiceImpl;
@@ -39,11 +40,11 @@ public class GetGroupNewMsg extends HttpServlet {
 		int CurMessageNum = Integer.parseInt(request.getParameter("CurMessageNum"));
 		
 		GroupChatRecordService groupchatRecordService = new GroupChatRecordServiceImpl();
-		List<GroupChatRecord> groupchatRecords = groupchatRecordService.getGroupNewMsg(groupId, CurMessageNum);
+		List<MyGroupChatRecord> myGroupchatRecords = groupchatRecordService.getGroupNewMyMsg(groupId, CurMessageNum);
 		
 		PrintWriter out=response.getWriter();
 		Gson gson =new Gson();
-	    String str=gson.toJson(groupchatRecords);    
+	    String str=gson.toJson(myGroupchatRecords);    
 		out.print(str);
 	}
 

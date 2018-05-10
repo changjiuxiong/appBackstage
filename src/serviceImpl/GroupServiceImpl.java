@@ -25,5 +25,10 @@ public class GroupServiceImpl implements GroupService{
 		GroupDao groupDao = new GroupDaoImpl();
 		return groupDao.addGroup(group);
 	}
+
+	public boolean updateGroupHeadImg(Group group) {
+		GroupDao groupDao = new GroupDaoImpl();
+		return groupDao.updateGroupHeadImg(group);
+	}
 	
 }

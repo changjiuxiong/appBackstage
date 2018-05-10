@@ -69,4 +69,19 @@ public class GroupDaoImpl implements GroupDao{
 		return true;
 	}
 
+	public boolean updateGroupHeadImg(Group group) {
+		try {
+			Connection conn=JdbcUtil.getConnection();
+			PreparedStatement pst=conn.prepareStatement("update chatGroup set headImgUrl = ? where id = ?");
+			pst.setString(1, group.getHeadImgUrl());
+			pst.setString(2, group.getId());
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} 
+		return true;
+	}
+
 }
